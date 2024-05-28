@@ -10,21 +10,33 @@ const question = process.argv[2] || 'hi'
 export const createStore = (docs) =>
   MemoryVectorStore.fromDocuments(docs, new OpenAIEmbeddings())
 
-export const docsFromPDF = () => {
-  const loader = new PDFLoader('xbox.pdf')
+export const uberDocsPDF = () => {
+  const loader = new PDFLoader('uber_2021.pdf')
   return loader.loadAndSplit(
     new CharacterTextSplitter({
       separator: '. ',
-      chunkSize: 2500,
+      chunkSize: 7000,
+      chunkOverlap: 200,
+    })
+  )
+}
+
+export const lyftDocsPDF = () => {
+  const loader = new PDFLoader('lyft_2021.pdf')
+  return loader.loadAndSplit(
+    new CharacterTextSplitter({
+      separator: '. ',
+      chunkSize: 7000,
       chunkOverlap: 200,
     })
   )
 }
 
 const loadStore = async () => {
-  const pdfDocs = await docsFromPDF()
+  const lyftDocs = await lyftDocsPDF()
+  const uberDocs = await uberDocsPDF()
 
-  return createStore([...pdfDocs])
+  return createStore([...lyftDocs, ...uberDocs])
 }
 
 const query = async () => {
