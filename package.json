@@ -19,7 +19,12 @@
   },
   "homepage": "https://github.com/PrakashKoneru/LLMProject#readme",
   "dependencies": {
+    "advanced-calculator": "^1.1.1",
     "dotenv": "^16.4.5",
-    "openai": "^4.47.1"
+    "langchain": "^0.0.170",
+    "openai": "^4.47.1",
+    "pdf-parse": "^1.1.1",
+    "youtube-transcript": "^1.2.1",
+    "youtubei.js": "^5.8.0"
   }
 }
